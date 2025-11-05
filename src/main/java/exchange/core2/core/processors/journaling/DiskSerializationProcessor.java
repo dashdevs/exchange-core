@@ -664,7 +664,7 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
 //            long t = System.nanoTime();
             channel.write(journalWriteBuffer);
 //            hdrRecorderRaw.recordValue(System.nanoTime() - t);
-            journalWriteBuffer.clear();
+            ((Buffer) journalWriteBuffer).clear();
 
         } else {
             // compressed write for bigger batches
@@ -675,7 +675,7 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
             lz4WriteBuffer.putInt(0); // reserve space
             lz4WriteBuffer.putInt(0); // reserve space
             lz4CompressorJournal.compress(journalWriteBuffer, lz4WriteBuffer);
-            journalWriteBuffer.clear();
+            ((Buffer) journalWriteBuffer).clear();
             writtenBytes += lz4WriteBuffer.position();
             int remainingCompressedLength = lz4WriteBuffer.position() - 9; // 1 + 4 + 4
             lz4WriteBuffer.putInt(1, remainingCompressedLength); // 1 byte offset
@@ -683,7 +683,7 @@ public final class DiskSerializationProcessor implements ISerializationProcessor
             ((Buffer) lz4WriteBuffer).flip();
 //            hdrRecorderLz4.recordValue(System.nanoTime() - t);
             channel.write(lz4WriteBuffer);
-            lz4WriteBuffer.clear();
+            ((Buffer) lz4WriteBuffer).clear();
         }
 
         if (forceStartNextFile || writtenBytes >= journalFileMaxSize) {
