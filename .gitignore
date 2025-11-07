@@ -10,3 +10,12 @@ delombok/
 
 # dumps #
 dumps/*.ec*
+
+#build
+build
+
+#gradle
+.gradle
+
+#DS
+.DS_Store
