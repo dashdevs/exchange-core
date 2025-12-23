@@ -4,7 +4,7 @@
 
     <groupId>exchange.core2</groupId>
     <artifactId>exchange-core</artifactId>
-    <version>0.5.4-SNAPSHOT-4</version>
+    <version>0.5.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -467,16 +467,16 @@
         </profile>
 
         <profile>
-            <id>github-nazarzastavnyi</id>
+            <id>github-dashdevs</id>
             <distributionManagement>
                 <snapshotRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/nazarzastavnyi/exchange-core</url>
+                    <url>https://maven.pkg.github.com/dashdevs/exchange-core</url>
                 </snapshotRepository>
                 <repository>
                     <id>github</id>
                     <name>GitHub Packages</name>
-                    <url>https://maven.pkg.github.com/nazarzastavnyi/exchange-core</url>
+                    <url>https://maven.pkg.github.com/dashdevs/exchange-core</url>
                 </repository>
             </distributionManagement>
             <build>
