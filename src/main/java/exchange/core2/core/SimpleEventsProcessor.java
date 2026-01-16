@@ -23,16 +23,23 @@ import java.util.function.ObjLongConsumer;
 public class SimpleEventsProcessor implements ObjLongConsumer<OrderCommand> {
 
     private final IEventsHandler eventsHandler;
+    private boolean processingEnabled = true;
 
     @Override
     public void accept(OrderCommand cmd, long seq) {
         try {
-            sendCommandResult(cmd, seq);
+            if (processingEnabled) {
+                sendCommandResult(cmd, seq);
+            }
             sendTradeEvents(cmd);
             sendMarketData(cmd);
         } catch (Exception ex) {
             log.error("Exception when handling command result data", ex);
         }
+    }
+
+    public void setProcessingEnabled(boolean value) {
+        processingEnabled = value;
     }
 
     private void sendTradeEvents(OrderCommand cmd) {
